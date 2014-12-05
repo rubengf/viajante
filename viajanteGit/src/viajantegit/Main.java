@@ -10,14 +10,9 @@ package viajantegit;
  * @author Ruben
  */
 public class Main {
-
-        public static void main(String[] args) {
-            Viajante v = new Viajante();
-            v.recibir_parametros_de_consola();
-        
-     
-        
-        
+    public static void main(String[] args) {
+        LeerFichero lf = new LeerFichero();
+        lf.leer();
     }
     
 }
