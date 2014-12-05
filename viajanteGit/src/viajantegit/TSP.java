@@ -33,11 +33,12 @@ public class TSP {
         
         for(int i=0; i<dimension; i++){
             for(int j=0 ; j< dimension ; j++){
-                matriz[i][j]= calculaDistanciaEuclidea(devolverNodoenPosicion(i), devolverNodoenPosicion(j));   
+                matriz[i][j]= calculaDistanciaEuclidea(devolverNodoenPosicion(i+1), devolverNodoenPosicion(j+1));
+                System.out.println("Matriz : "+matriz[i][j]+" ");
             }
         }
         
-        
+       // System.out.println("Resultado : "+matriz[10][10]+" ");
         
         
     }
@@ -46,14 +47,14 @@ public class TSP {
         Nodo nodoActual= listaNodosAbiertos.get(0);
         listaNodosCerrados.add(listaNodosAbiertos.get(0));
         
-       //saltar de un nodo a otro ( al de menor distancia euclidea )
+       //saltar de un nodo a otro ( al de menor distancia euclidea ) //llamar al Nodo más cercano
         
         
         
         
     }
     
-    public Nodo nodoMasCercado(int pos){
+ /*   public Nodo nodoMasCercado(int pos){
         
         double menorDistancia;
         
@@ -66,9 +67,14 @@ public class TSP {
         }
         
         for(int i = 0 ; i< listaNodosAbiertos.size() ; i++){
-            matriz[pos][i]== 
+             
         }
-    }
+        
+        return matriz[0][0];
+                
+    }*/
+    
+    
     
     public double calculaDistanciaEuclidea(Nodo a, Nodo b){
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));

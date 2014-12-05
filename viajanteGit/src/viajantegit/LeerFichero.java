@@ -8,8 +8,7 @@ package viajantegit;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -40,7 +39,7 @@ public class LeerFichero {
         try 
         {
             
-        this.fichero = new FileReader("a280.tsp");
+        this.fichero = new FileReader("a281.tsp");
         this.bf = new BufferedReader(fichero);
         
         while (( linea = bf.readLine())!=null) 
@@ -58,6 +57,7 @@ public class LeerFichero {
                    
                 }
         System.out.println(MatrizNodos.size());
+        
         
        
                 
