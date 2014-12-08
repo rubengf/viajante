@@ -17,6 +17,7 @@ public class TSP {
     Double[][] matriz;
     int dimension;
     
+    
     ArrayList<Nodo> listaNodosCerrados;
     ArrayList<Nodo> listaNodosAbiertos;
     
@@ -43,51 +44,84 @@ public class TSP {
         
     }
     
-    public void RecorrerMatrizBidimensional(){
+    public ArrayList<Nodo> RecorrerMatrizBidimensional(){
         Nodo nodoActual= listaNodosAbiertos.get(0);
+        if( listaNodosAbiertos.isEmpty()){
+            System.out.println("Lista NodosAbiertos esta Vacio");
+        }
+        listaNodosCerrados = new ArrayList<Nodo>();
         listaNodosCerrados.add(listaNodosAbiertos.get(0));
-        
-        Nodo nodoMasCercano = nodoMasCercano(nodoActual.getPos());
         
        //saltar de un nodo a otro ( al de menor distancia euclidea ) //llamar al Nodo más cercano
         
+        // Si el tamaño de nodos cerrados es distinto la numero total de nodos
+        while(listaNodosCerrados.size() != dimension)
+        {
+            // Nodo actual es igual al nodo mas cercano
+            nodoActual = nodoMasCercano(nodoActual.getPos());
+            // Cerramos el nodo actual
+            listaNodosCerrados.add(nodoActual);
+            
+            
+        }
         
-        
+        return listaNodosCerrados;
         
     }
     
-    public Nodo nodoMasCercado(int pos){
+    public Nodo nodoMasCercano(int pos){
         
         double menorDistancia;
         double distanciaActual;
         Nodo nodoMasCercano = null;
+        pos = pos - 1;
         
         if (pos != 0)
+        {
             menorDistancia = matriz[pos][0];
-        
+            nodoMasCercano = devolverNodoenPosicion(0);
+        }
         else
         {
             menorDistancia = matriz[pos][1];
+            nodoMasCercano = devolverNodoenPosicion(1);
         }
         
         for(int i = 0 ; i< listaNodosAbiertos.size() ; i++)
         {
-            distanciaActual = calculaDistanciaEuclidea(listaNodosAbiertos.get(i),devolverNodoenPosicion(pos)); 
-            if (distanciaActual < menorDistancia)
+            distanciaActual = calculaDistanciaEuclidea(listaNodosAbiertos.get(i),devolverNodoenPosicion(pos +1)); 
+            if (distanciaActual < menorDistancia && pos !=i && !nodoEstaCerrado(i))
             {
-                if(listaNodosAbiertos.get(i)!=devolverNodoenPosicion(pos)){
+                if(listaNodosAbiertos.get(i)!=devolverNodoenPosicion(pos+1)){
                  menorDistancia = distanciaActual;
-                 nodoMasCercano = devolverNodoenPosicion(pos);
+                 nodoMasCercano = devolverNodoenPosicion(pos+1);
             }
         }
-        
+        }
         return nodoMasCercano;
+    
     }
     
     
     
-    public double calculaDistanciaEuclidea(Nodo a, Nodo b){
+    public double calculaDistanciaEuclidea(Nodo a, Nodo b)
+    {
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
+    }
+    
+    public boolean nodoEstaCerrado(int posicion)
+    {
+        Boolean cerrado = false;
+        
+        for( Nodo n : listaNodosCerrados )
+        {
+            if(n.getPos() == posicion){
+                cerrado = true;
+            }
+            
+        }
+        return cerrado;
+        
     }
     
     public Nodo devolverNodoenPosicion(int posicion){

@@ -21,6 +21,9 @@ public class Main {
         
         TSP algoritmo = new TSP(matriz);
         algoritmo.CrearMatrizBidimensional();
+        System.out.print("De:");
+        for (Nodo nodo : algoritmo.RecorrerMatrizBidimensional())
+            System.out.print(nodo.getPos()+" a ");
         
     }
     
