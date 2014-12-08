@@ -47,6 +47,8 @@ public class TSP {
         Nodo nodoActual= listaNodosAbiertos.get(0);
         listaNodosCerrados.add(listaNodosAbiertos.get(0));
         
+        Nodo nodoMasCercano = nodoMasCercano(nodoActual.getPos());
+        
        //saltar de un nodo a otro ( al de menor distancia euclidea ) //llamar al Nodo más cercano
         
         
@@ -54,9 +56,11 @@ public class TSP {
         
     }
     
- /*   public Nodo nodoMasCercado(int pos){
+    public Nodo nodoMasCercado(int pos){
         
         double menorDistancia;
+        double distanciaActual;
+        Nodo nodoMasCercano = null;
         
         if (pos != 0)
             menorDistancia = matriz[pos][0];
@@ -66,13 +70,19 @@ public class TSP {
             menorDistancia = matriz[pos][1];
         }
         
-        for(int i = 0 ; i< listaNodosAbiertos.size() ; i++){
-             
+        for(int i = 0 ; i< listaNodosAbiertos.size() ; i++)
+        {
+            distanciaActual = calculaDistanciaEuclidea(listaNodosAbiertos.get(i),devolverNodoenPosicion(pos)); 
+            if (distanciaActual < menorDistancia)
+            {
+                if(listaNodosAbiertos.get(i)!=devolverNodoenPosicion(pos)){
+                 menorDistancia = distanciaActual;
+                 nodoMasCercano = devolverNodoenPosicion(pos);
+            }
         }
         
-        return matriz[0][0];
-                
-    }*/
+        return nodoMasCercano;
+    }
     
     
     
