@@ -38,7 +38,7 @@ public class LeerFichero {
         
         try 
         {
-            
+        //leemos el fichero tsp, descargado de la tsplib quitandole toda la cabecera    
         this.fichero = new FileReader("a281.tsp");
         this.bf = new BufferedReader(fichero);
         

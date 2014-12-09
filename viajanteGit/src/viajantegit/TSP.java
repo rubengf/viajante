@@ -26,7 +26,7 @@ public class TSP {
     
     }
     
-    
+    //matriz de distancias euclideas
     public void CrearMatrizBidimensional(){
         dimension = listaNodosAbiertos.size();
         
@@ -64,7 +64,7 @@ public class TSP {
             
             
         }
-        // Volvemos a la primera ciudad porque me dijiste que era asi.
+        // Volvemos a la primera ciudad, ya que es la ciudad de inicio/fin
         listaNodosCerrados.add(listaNodosCerrados.get(0));
         
         return listaNodosCerrados;
