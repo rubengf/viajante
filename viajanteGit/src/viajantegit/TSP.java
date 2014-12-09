@@ -64,6 +64,8 @@ public class TSP {
             
             
         }
+        // Volvemos a la primera ciudad porque me dijiste que era asi.
+        listaNodosCerrados.add(listaNodosCerrados.get(0));
         
         return listaNodosCerrados;
         
@@ -71,32 +73,22 @@ public class TSP {
     
     public Nodo nodoMasCercano(int pos){
         
-        double menorDistancia;
+        double menorDistancia = Integer.MAX_VALUE;
         double distanciaActual;
         Nodo nodoMasCercano = null;
         pos = pos - 1;
-        
-        if (pos != 0)
-        {
-            menorDistancia = matriz[pos][0];
-            nodoMasCercano = devolverNodoenPosicion(0);
-        }
-        else
-        {
-            menorDistancia = matriz[pos][1];
-            nodoMasCercano = devolverNodoenPosicion(1);
-        }
-        
-        for(int i = 0 ; i< listaNodosAbiertos.size() ; i++)
+       
+        for(int i = 0 ; i< dimension ; i++)
         {
             distanciaActual = calculaDistanciaEuclidea(listaNodosAbiertos.get(i),devolverNodoenPosicion(pos +1)); 
-            if (distanciaActual < menorDistancia && pos !=i && !nodoEstaCerrado(i))
+           
+             if (distanciaActual < menorDistancia && pos!=i && !nodoEstaCerrado(i+1))
             {
-                if(listaNodosAbiertos.get(i)!=devolverNodoenPosicion(pos+1)){
-                 menorDistancia = distanciaActual;
-                 nodoMasCercano = devolverNodoenPosicion(pos+1);
+              
+                    menorDistancia = distanciaActual;
+                    nodoMasCercano = devolverNodoenPosicion(i+1);
+                
             }
-        }
         }
         return nodoMasCercano;
     
