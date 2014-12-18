@@ -33,15 +33,12 @@ public class GUI extends JFrame{
     
     JPanel panel_menu;
     JPanel panel_principal;
-    JTable tabla = new JTable();
     JTextArea recorridofinal = new JTextArea();
     JTextArea matrizBidi = new JTextArea();
     JMenuBar barra_menu = new JMenuBar();
     JMenu menu_inicio = new JMenu("Inicio");
     JMenuItem item_CargaFicheroAtributos = new JMenuItem("Cargar fichero TSP...");
     JMenu menu_ayuda = new JMenu("Ayuda");
-    JSeparator sep_ver = new JSeparator(SwingConstants.VERTICAL);
-    JSeparator sep_hor = new JSeparator();
     
     JMenuItem item_Instrucciones = new JMenuItem("Instrucciones");
     JMenuItem item_mi = new JMenuItem("Saber más..");
@@ -77,23 +74,15 @@ public class GUI extends JFrame{
         panel_principal= new JPanel();
 
         barra_menu.add(menu_inicio);
-    //    barra_menu.add(sep_ver);
 	barra_menu.add(menu_ayuda);
 	
         menu_ayuda.add(item_Instrucciones);
         menu_ayuda.add(item_mi);
 	menu_inicio.add(item_CargaFicheroAtributos);
 
-      
 
-        
-
-      //  barra_menu.add(boton_empezar);
         panel_menu.add(barra_menu);
-      //  panel_menu.add(boton_empezar);
-        //recorridofinal = null;
-         //boton_empezar.setPreferredSize(new Dimension(90,40));
-        //panel_principal.add(recorridofinal);
+
         
         
         JScrollPane panelMatriz = new JScrollPane(matrizBidi);
@@ -101,16 +90,15 @@ public class GUI extends JFrame{
 	panelMatriz.setPreferredSize(new Dimension (this.getWidth()/3, this.getHeight()));
 		
 		
-    JScrollPane panelArbol = new JScrollPane(recorridofinal);
-    panelArbol.setBorder(new TitledBorder(new TitledBorder(""), "Resultado", TitledBorder.CENTER, TitledBorder.TOP ));
+        JScrollPane panelArbol = new JScrollPane(recorridofinal);
+        panelArbol.setBorder(new TitledBorder(new TitledBorder(""), "Resultado", TitledBorder.CENTER, TitledBorder.TOP ));
                 panelArbol.setPreferredSize(new Dimension (this.getWidth()/3, this.getHeight()));
                 
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-												panelMatriz, panelArbol);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,panelMatriz, panelArbol);
 		splitPane.setOneTouchExpandable(true);
 		panel_principal.add(splitPane, BorderLayout.CENTER);
                 
-    item_Instrucciones.addActionListener(new ActionListener() {
+        item_Instrucciones.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,7 +106,7 @@ public class GUI extends JFrame{
             }
         });
     
-    item_mi.addActionListener(new ActionListener() {
+        item_mi.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -155,7 +143,8 @@ public class GUI extends JFrame{
         });
         
         
-        
+        recorridofinal.setEditable(false);
+        matrizBidi.setEditable(false);
 
         
         contenedorPrincipal.add(panel_menu, BorderLayout.NORTH);
