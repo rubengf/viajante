@@ -5,7 +5,8 @@
  */
 package viajantegit;
 
-import java.util.ArrayList;
+
+import javax.swing.UIManager;
 
 /**
  *
@@ -13,21 +14,16 @@ import java.util.ArrayList;
  */
 public class Main {
     public static void main(String[] args) {
-        
-        GUI a = new GUI();
-        /*
-        ArrayList<Nodo> matriz;
-       
-        
-        
-        matriz =FileManager.loadAtributos();
-        
-        TSP algoritmo = new TSP(matriz);
-        algoritmo.CrearMatrizBidimensional();
-        System.out.print("De:");
-        for (Nodo nodo : algoritmo.RecorrerMatrizBidimensional())
-            System.out.print(nodo.getPos()+" a ");*/
-        
-    }
+ 
+
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+	    } 
+	    catch (Exception e) {}
+		
+		new GUI();
+		
+		
+	}
     
 }

@@ -35,16 +35,16 @@ public class GUI extends JFrame{
     JPanel panel_principal;
     JTable tabla = new JTable();
     JTextArea recorridofinal = new JTextArea();
+    JTextArea matrizBidi = new JTextArea();
     JMenuBar barra_menu = new JMenuBar();
     JMenu menu_inicio = new JMenu("Inicio");
-    JMenuItem item_CargaFicheroAtributos = new JMenuItem("Cargar fichero de atributos...");
-    JMenuItem item_CargaFicheroEjemplo = new JMenuItem("Cargar fichero de ejemplo...");
+    JMenuItem item_CargaFicheroAtributos = new JMenuItem("Cargar fichero TSP...");
     JMenu menu_ayuda = new JMenu("Ayuda");
-    JMenuItem item_Instrucciones = new JMenuItem("Instrucciones");
-    JMenuItem item_Nosotros = new JMenuItem("Sobre nosotros..");
-    JButton boton_empezar = new JButton("Empezar");
     JSeparator sep_ver = new JSeparator(SwingConstants.VERTICAL);
     JSeparator sep_hor = new JSeparator();
+    
+    JMenuItem item_Instrucciones = new JMenuItem("Instrucciones");
+    JMenuItem item_mi = new JMenuItem("Saber más..");
     
     private ArrayList<Nodo> atributos;
     private Container contenedorPrincipal;
@@ -54,7 +54,7 @@ public class GUI extends JFrame{
             
     
     public GUI (){
-        setTitle("Practica 2 - Algoritmo ID3");
+        setTitle("Practica MOG - Algoritmo TSP");
         
         panel_menu = new JPanel(new BorderLayout(1, 2));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,14 +66,13 @@ public class GUI extends JFrame{
         setContentPane(contenedorPrincipal);
         this.setLocationRelativeTo(null);
         setVisible(true);
-        boton_empezar.setBackground(Color.CYAN);
-        boton_empezar.setFont(fuente);
+
         menu_inicio.setFont(fuente);
         menu_inicio.setBackground(Color.GRAY);
         item_CargaFicheroAtributos.setFont(fuente);
-        item_CargaFicheroEjemplo.setFont(fuente);
+
         item_Instrucciones.setFont(fuente);
-        item_Nosotros.setFont(fuente);
+        item_mi.setFont(fuente);
         menu_ayuda.setFont(fuente);
         panel_principal= new JPanel();
 
@@ -82,15 +81,11 @@ public class GUI extends JFrame{
 	barra_menu.add(menu_ayuda);
 	
         menu_ayuda.add(item_Instrucciones);
-        menu_ayuda.add(item_Nosotros);
+        menu_ayuda.add(item_mi);
 	menu_inicio.add(item_CargaFicheroAtributos);
 
-	menu_inicio.add(item_CargaFicheroEjemplo);
-        menu_inicio.add(boton_empezar);
       
-       
-        barra_menu.add(sep_ver);
-        barra_menu.add(boton_empezar);
+
         
 
       //  barra_menu.add(boton_empezar);
@@ -98,21 +93,53 @@ public class GUI extends JFrame{
       //  panel_menu.add(boton_empezar);
         //recorridofinal = null;
          //boton_empezar.setPreferredSize(new Dimension(90,40));
-        panel_principal.add(recorridofinal);
+        //panel_principal.add(recorridofinal);
+        
+        
+        JScrollPane panelMatriz = new JScrollPane(matrizBidi);
+        panelMatriz.setBorder(new TitledBorder(new TitledBorder(""), "Matriz de Distancias", TitledBorder.CENTER, TitledBorder.TOP ));
+	panelMatriz.setPreferredSize(new Dimension (this.getWidth()/3, this.getHeight()));
+		
+		
+    JScrollPane panelArbol = new JScrollPane(recorridofinal);
+    panelArbol.setBorder(new TitledBorder(new TitledBorder(""), "Resultado", TitledBorder.CENTER, TitledBorder.TOP ));
+                panelArbol.setPreferredSize(new Dimension (this.getWidth()/3, this.getHeight()));
+                
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+												panelMatriz, panelArbol);
+		splitPane.setOneTouchExpandable(true);
+		panel_principal.add(splitPane, BorderLayout.CENTER);
+                
+    item_Instrucciones.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new VentanaInstrucciones();
+            }
+        });
+    
+    item_mi.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new VentanaMi();
+            }
+        });
         
         item_CargaFicheroAtributos.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                StringBuffer aux = new StringBuffer();
                 try{ atributos = FileManager.loadAtributos();
                  
                     TSP algoritmo = new TSP(atributos);
-                    algoritmo.CrearMatrizBidimensional();
-                    
+                    aux = algoritmo.CrearMatrizBidimensional();
+                    matrizBidi.setText(aux.toString());
                     StringBuffer sb = new StringBuffer();
                     sb.append("De:");
                     for (Nodo nodo : algoritmo.RecorrerMatrizBidimensional())
-                        sb.append(nodo.getPos()+" a ");
+                        sb.append(nodo.getPos()+"\n"+" a ");
                     
                     recorridofinal.setText(sb.toString());
                     
@@ -126,16 +153,8 @@ public class GUI extends JFrame{
                 
             }
         });
-        ;
         
         
-      
-        boton_empezar.setEnabled(false);
-
-         
-        
-     //   panel_menu.add(barra_menu, BorderLayout.WEST);
-     //   panel_menu.add( boton_empezar, BorderLayout.EAST);
         
 
         

@@ -21,13 +21,14 @@ public class TSP {
     ArrayList<Nodo> listaNodosCerrados;
     ArrayList<Nodo> listaNodosAbiertos;
     
+    StringBuffer sb = new StringBuffer();
     public TSP(ArrayList<Nodo> matrizLeida){
         this.listaNodosAbiertos = matrizLeida;
     
     }
     
     //matriz de distancias euclideas
-    public void CrearMatrizBidimensional(){
+    public StringBuffer CrearMatrizBidimensional(){
         dimension = listaNodosAbiertos.size();
         
         matriz = new Double[dimension][dimension];
@@ -35,10 +36,11 @@ public class TSP {
         for(int i=0; i<dimension; i++){
             for(int j=0 ; j< dimension ; j++){
                 matriz[i][j]= calculaDistanciaEuclidea(devolverNodoenPosicion(i+1), devolverNodoenPosicion(j+1));
+                sb.append("Matriz : "+matriz[i][j]+" \n");
                 System.out.println("Matriz : "+matriz[i][j]+" ");
             }
         }
-        
+        return sb;
        // System.out.println("Resultado : "+matriz[10][10]+" ");
         
         
