@@ -13,17 +13,20 @@ import java.util.ArrayList;
  */
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Nodo> matriz;
-        LeerFichero lf = new LeerFichero();
         
-        lf.leer();
-        matriz =lf.MatrizNodos;
+        GUI a = new GUI();
+        /*
+        ArrayList<Nodo> matriz;
+       
+        
+        
+        matriz =FileManager.loadAtributos();
         
         TSP algoritmo = new TSP(matriz);
         algoritmo.CrearMatrizBidimensional();
         System.out.print("De:");
         for (Nodo nodo : algoritmo.RecorrerMatrizBidimensional())
-            System.out.print(nodo.getPos()+" a ");
+            System.out.print(nodo.getPos()+" a ");*/
         
     }
     
