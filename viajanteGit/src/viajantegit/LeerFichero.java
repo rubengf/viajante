@@ -51,8 +51,8 @@ public class LeerFichero {
         String a;
         try 
         {
-        //leemos el fichero tsp, descargado de la tsplib quitandole toda la cabecera    
-        this.fichero = new FileReader("xql662.tsp");
+        //leemos el fichero tsp   
+        this.fichero = new FileReader("dj38.tsp");
         this.bf = new BufferedReader(fichero);
         
         //Me salto el encabezado
@@ -72,7 +72,7 @@ public class LeerFichero {
                 if(st.hasMoreElements())
                      y = st.nextToken();
                 if(!pos.equalsIgnoreCase("EOF"))        
-                MatrizNodos.add(new Nodo(Integer.parseInt(pos), Integer.parseInt(x), Integer.parseInt(y)));
+                MatrizNodos.add(new Nodo(Integer.parseInt(pos), Double.parseDouble(x), Double.parseDouble(y)));
             
         }
         
