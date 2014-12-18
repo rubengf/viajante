@@ -28,34 +28,55 @@ public class LeerFichero {
     String dimension;
     
     String linea;
+    String Nombre;
+    String comentario;
+    String tipo;
+    String dimension_cabecero;
 
     public LeerFichero() {
        
     }
     
+    public void leerEncabezado(String a , StringTokenizer tok){
+        
+        while(!a.equalsIgnoreCase("NODE_COORD_SECTION")){
+            a = tok.nextToken();
+        }
+        
+    }
+    
+    
     public void leer(){
         MatrizNodos = new ArrayList<>();
-        
+        String a;
         try 
         {
         //leemos el fichero tsp, descargado de la tsplib quitandole toda la cabecera    
-        this.fichero = new FileReader("a281.tsp");
+        this.fichero = new FileReader("xql662.tsp");
         this.bf = new BufferedReader(fichero);
         
-        while (( linea = bf.readLine())!=null) 
-        {
-                StringTokenizer st = new StringTokenizer(linea," ");
-                    
-                if(st.hasMoreElements())
+        //Me salto el encabezado
+        while ((linea = bf.readLine()) != null && !linea.equals("NODE_COORD_SECTION")){
+            
+        }
+        
+        while ((linea = bf.readLine()) != null && !linea.equals("EOF")){
+            
+            StringTokenizer st = new StringTokenizer(linea," ");
+            
+            if(st.hasMoreElements()){
                      pos = st.nextToken();
+                }
                 if(st.hasMoreElements())
                      x = st.nextToken();
                 if(st.hasMoreElements())
                      y = st.nextToken();
                 if(!pos.equalsIgnoreCase("EOF"))        
                 MatrizNodos.add(new Nodo(Integer.parseInt(pos), Integer.parseInt(x), Integer.parseInt(y)));
-                   
-                }
+            
+        }
+        
+      
         System.out.println(MatrizNodos.size());
         
         
